@@ -1,0 +1,58 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Tipo {
+  CARRO
+  MOTO
+}
+
+model User{
+  id  Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  isFuncionario Boolean @default(false)
+  matricula String? @unique
+  isClienteRecorrente Boolean @default(false)
+  dataNascimento DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  alocacaos Alocacao[]
+}
+
+model Veiculo{
+  id Int @id @default(autoincrement())
+  placa String @unique
+  modelo String
+  marca String
+  ano Int
+  cor String
+  quilometragem String
+  isAutomatico Boolean
+  isDisponivel Boolean @default(true)
+  tipo Tipo
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  alocacaos Alocacao[]
+}
+
+model Alocacao{
+  id Int @id @default(autoincrement())
+  clienteId Int
+  veiculoId Int
+  dataAlocacao DateTime
+  dataDevolucao DateTime?
+  valorTotal Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cliente User @relation(fields: [clienteId], references: [id])
+  veiculo Veiculo @relation(fields: [veiculoId], references: [id])
+}
