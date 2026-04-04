@@ -12,4 +12,5 @@ router.get('/:id', authMiddleware, verificaFuncionario, userController.getUserBy
 router.put('/funcionario/:id', authMiddleware, verificaFuncionario, userController.update);
 router.put('/cliente/:id', authMiddleware, isFuncionarioOuCliente, userController.update);
 router.patch('/:id/password', authMiddleware, onlyCurrentUser, userController.changePassword);
+router.delete('/:id', authMiddleware, onlyCurrentUser, userController.deleteUser);
 export default router;
