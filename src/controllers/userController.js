@@ -26,3 +26,15 @@ export const getAllUsers = async (req, res) => {
         res.status(400).json({ error: error.message });
     }  
 };
+
+export const getUserById = async (req, res) => {
+    try {
+        const user = await userService.getUserById(parseInt(req.params.id));
+        if (!user) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

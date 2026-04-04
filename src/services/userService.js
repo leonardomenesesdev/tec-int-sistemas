@@ -51,3 +51,17 @@ export const getAllUsers = async() => {
         }
     });
 }
+
+export const getUserById = async(id) => {
+    return await prisma.user.findUnique({
+        where: { id },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            dataNascimento: true,
+            isFuncionario: true
+        }
+    });
+}
+

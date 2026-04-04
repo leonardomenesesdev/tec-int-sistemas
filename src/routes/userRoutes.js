@@ -7,5 +7,5 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 //usuário deve estar logado e ser funcionário
 router.get('/',authMiddleware, verificaFuncionario, userController.getAllUsers);
-
+router.get('/:id', authMiddleware, verificaFuncionario, userController.getUserById);
 export default router;
