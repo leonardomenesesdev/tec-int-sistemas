@@ -2,6 +2,7 @@ import { prisma } from '../config/prisma.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+//CREATE
 export const register = async(userJson) => {
     const { email, password, name, dataNascimento, isFuncionario, matricula } = userJson;
 
@@ -36,4 +37,17 @@ export const login = async(userJson) => {
     }
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     return { email: user.email, token };
+}
+
+//READ
+export const getAllUsers = async() => {
+    return await prisma.user.findMany({
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            dataNascimento: true,
+            isFuncionario: true
+        }
+    });
 }
