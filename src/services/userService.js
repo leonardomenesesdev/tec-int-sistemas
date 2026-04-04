@@ -65,3 +65,49 @@ export const getUserById = async(id) => {
     });
 }
 
+//UPDATE - editar usuário
+export const updateFuncionario = async (id, userJson) => {
+    // Note que NÃO desestruturamos o 'password' aqui
+    const { name, email, dataNascimento, isFuncionario, matricula } = userJson;
+    
+    return await prisma.user.update({
+        where: { id: Number(id) },
+        data: {
+            name,
+            email,
+            isFuncionario,
+            matricula,
+            dataNascimento: dataNascimento ? new Date(dataNascimento) : undefined
+        },
+        select: { id: true, name: true, email: true }
+    });
+};
+
+export const updateCliente = async (id, userJson) => {
+    const { name, email, dataNascimento } = userJson;
+    
+    const data = {};
+    if (name) data.name = name;
+    if (email) data.email = email;
+    if (dataNascimento) data.dataNascimento = new Date(dataNascimento);
+
+    return await prisma.user.update({
+        where: { id: Number(id) },
+        data,
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            dataNascimento: true
+        }
+    });
+};
+
+export const updatePassword = async (id, newPassword) => {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    
+    return await prisma.user.update({
+        where: { id: Number(id) },
+        data: { password: hashedPassword }
+    });
+};

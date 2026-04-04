@@ -38,3 +38,38 @@ export const getUserById = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+export const update = async (req, res) => {
+    const { id } = req.params;
+    const userLogado = req.user; // Vindo do middleware de autenticação
+
+    try {
+        let updatedUser;
+        
+        if (userLogado.isFuncionario) {
+            updatedUser = await userService.updateFuncionario(id, req.body);
+        } else {
+            updatedUser = await userService.updateCliente(id, req.body);
+        }
+
+        res.json(updatedUser);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+export const changePassword = async (req, res) => {
+    const { id } = req.params;
+    const { newPassword } = req.body;
+
+    if (!newPassword || newPassword.length < 6) {
+        return res.status(400).json({ error: 'A nova senha deve ter pelo menos 6 caracteres.' });
+    }
+
+    try {
+        await userService.updatePassword(id, newPassword);
+        res.json({ message: 'Senha alterada com sucesso!' });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao processar alteração de senha.' });
+    }
+};

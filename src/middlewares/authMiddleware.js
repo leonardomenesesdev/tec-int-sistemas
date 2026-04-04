@@ -26,3 +26,24 @@ export const verificaFuncionario = (req, res, next) => {
     }
     next();
 };
+
+export const isFuncionarioOuCliente = (req, res, next) => {
+    const {id}  = req.params;
+    const currentUser = req.user;
+    if (!currentUser.isFuncionario && currentUser.id !== parseInt(id)) {
+        return res.status(403).json({ error: 'Acesso negado. Usuário não é funcionário ou cliente' });
+    }
+    next();
+};
+
+export const onlyCurrentUser = (req, res, next) => {
+    const { id } = req.params;
+    const currentUser = req.user;
+
+    if (currentUser.id !== parseInt(id)) {
+        return res.status(403).json({ 
+            error: 'Ação negada, você só pode alterar a sua própria senha.' 
+        });
+    }
+    next();
+};
