@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
+import { register, getAllveiculos, getveiculoByplaca, updateVeiculoController, deleteVeiculoController } from '../controllers/veiculoController.js';
+import { authMiddleware, verificaFuncionario } from '../middlewares/authMiddleware.js';
 const router = express.Router();
-const { register, getAllveiculos, getveiculoByplaca, updateVeiculoController, deleteVeiculoController } = require('../controllers/veiculoController.js');
-const { authenticateToken, authorizeEmployee } = require('../middlewares/auth.js');
 
-router.post('/veiculos', authenticateToken, authorizeEmployee, register);
-router.get('/veiculos', authenticateToken, getAllveiculos);
-router.get('/veiculos/:placa', authenticateToken, getveiculoByplaca);
-router.put('/veiculos/:placa', authenticateToken, authorizeEmployee, updateVeiculoController);
-router.delete('/veiculos/:placa', authenticateToken, authorizeEmployee, deleteVeiculoController);
+router.post('/', authMiddleware, verificaFuncionario, register);
+router.get('/', authMiddleware, getAllveiculos);
+router.get('/:placa', authMiddleware, getveiculoByplaca);
+router.put('/:placa', authMiddleware, verificaFuncionario, updateVeiculoController);
+router.delete('/:placa', authMiddleware, verificaFuncionario, deleteVeiculoController);
 
-module.exports = router;
+export default router;

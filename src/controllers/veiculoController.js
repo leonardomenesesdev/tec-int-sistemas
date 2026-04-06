@@ -1,6 +1,6 @@
-const veiculoService = require('../services/veiculoService.js');
+import * as veiculoService from '../services/veiculoService.js';
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
     try {
         const veiculo = await veiculoService.register(req.body);
         res.status(201).json(veiculo);
@@ -8,7 +8,7 @@ const register = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-const getAllveiculos = async (req, res) => {
+export const getAllveiculos = async (req, res) => {
     try {
         const veiculos = await veiculoService.getAllveiculos();
         res.status(200).json(veiculos);
@@ -16,7 +16,7 @@ const getAllveiculos = async (req, res) => {
         res.status(400).json({ error: error.message });
     }  
 };
-const getveiculoByplaca = async (req, res) => {
+export const getveiculoByplaca = async (req, res) => {
     try {
         const veiculo = await veiculoService.getveiculoByplaca(req.params.placa);
         if (!veiculo) {
@@ -28,7 +28,7 @@ const getveiculoByplaca = async (req, res) => {
     }
 };
 
-const updateVeiculoController = async (req, res) => {
+export const updateVeiculoController = async (req, res) => {
     try {
         const veiculo = await veiculoService.updateVeiculo(req.params.placa, req.body, req.user);
         res.status(200).json(veiculo);
@@ -37,13 +37,11 @@ const updateVeiculoController = async (req, res) => {
     }
 };
 
-const deleteVeiculoController = async (req, res) => {
+export const deleteVeiculoController = async (req, res) => {
     try {
         const veiculo = await veiculoService.deleteveiculo(req.params.placa);
-        res.status(200).json(veiculo);
+        res.status(200).json({ message: 'Veículo deletado com sucesso!', veiculo });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
-
-module.exports = { register, getAllveiculos, getveiculoByplaca, updateVeiculoController, deleteVeiculoController };

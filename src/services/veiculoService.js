@@ -1,7 +1,7 @@
-const { prisma } = require('../config/prisma.js');
-
+import { prisma } from '../config/prisma.js';
 //CREATE
-const register = async(veiculoJson) => {
+export const register = async(veiculoJson) => {
+    try {
     const { placa, modelo, marca,ano,cor,quilometragem,isAutomatico,isDisponivel,tipo  } = veiculoJson;
 
     const alreadyExists = await prisma.veiculo.findUnique({ where: { placa } });
@@ -20,15 +20,19 @@ const register = async(veiculoJson) => {
             marca,
             ano,
             cor,
-            quilometragem,
-            tipo,
-            isAutomatico,
-            isDisponivel,
-        }
-    });
+                quilometragem,
+                tipo,
+                isAutomatico,
+                isDisponivel,
+            }
+        });
+    } catch (error) {
+        throw new Error("Erro ao cadastrar veículo. Verifique a compatibilidade dos dados. Erro: "+error.message);
+    }
+
 }
 //READ
-const getAllveiculos = async() => {
+export const getAllveiculos = async() => {
     return await prisma.veiculo.findMany({
         select: {
              placa:true,
@@ -44,7 +48,7 @@ const getAllveiculos = async() => {
     });
 }
 
-const getveiculoByplaca = async(placa) => {
+export const getveiculoByplaca = async(placa) => {
     return await prisma.veiculo.findUnique({
         where: { placa },
         select: { 
@@ -62,7 +66,7 @@ const getveiculoByplaca = async(placa) => {
 }
 
 //UPDATE - editar veículo
-const updateVeiculo = async (placa, veiculoJson, user) => {
+export const updateVeiculo = async (placa, veiculoJson, user) => {
     if (!user || !user.isFuncionario) {
         throw new Error('Acesso negado: somente funcionários podem atualizar veículos');
     }
@@ -90,8 +94,7 @@ const updateVeiculo = async (placa, veiculoJson, user) => {
 };
 
 //DELETE
-const deleteveiculo = async(placa) => {
+export const deleteveiculo = async(placa) => {
     return await prisma.veiculo.delete({ where: { placa } });
 }
 
-module.exports = { register, getAllveiculos, getveiculoByplaca, updateVeiculo, deleteveiculo };
