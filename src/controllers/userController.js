@@ -78,7 +78,7 @@ export const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {
         await userService.deleteUser(id);
-        res.json({ message: 'Usuário deletado com sucesso!' });
+        res.status(204).json({ message: 'Usuário deletado com sucesso!' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
