@@ -35,7 +35,7 @@ export const register = async(veiculoJson) => {
 export const getAllveiculos = async() => {
     return await prisma.veiculo.findMany({
         select: {
-             placa:true,
+            placa:true,
             modelo:true,
             marca:true,
             ano:true,
@@ -52,6 +52,7 @@ export const getveiculoByplaca = async(placa) => {
     return await prisma.veiculo.findUnique({
         where: { placa },
         select: { 
+            id:true,
             placa:true,
             modelo:true,
             marca:true,
