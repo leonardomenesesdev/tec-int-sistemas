@@ -1,4 +1,4 @@
-import './env.js'; // 👈 deve ser o PRIMEIRO import, sempre
+import './env.js';
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';

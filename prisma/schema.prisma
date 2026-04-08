@@ -50,6 +50,7 @@ model Alocacao{
   dataAlocacao DateTime
   dataDevolucao DateTime?
   valorTotal Float
+  isAtiva Boolean @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
