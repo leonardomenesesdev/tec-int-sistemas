@@ -7,6 +7,9 @@ import alocacaoRoutes from './routes/alocacaoRoutes.js';
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.get('/api', (req, res) => {
+    res.send('Olá, mundo!');
+});
 app.use('/api/users', userRoutes);
 app.use('/api/veiculos', veiculoRoutes);
 app.use('/api/alocacoes', alocacaoRoutes);
