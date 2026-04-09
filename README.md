@@ -289,7 +289,7 @@ Rotas marcadas com 🔒 exigem autenticação. Rotas marcadas com 👷 exigem qu
 
 ### Buscar Veículo por Placa [GET] 🔒
 
-- Rota: `GET /api/veiculos/:placa`
+- Rota: `GET /veiculos/:placa`
 - Resposta:
   ```json
   {
@@ -456,7 +456,7 @@ Rotas marcadas com 🔒 exigem autenticação. Rotas marcadas com 👷 exigem qu
 
 ### Atualizar Alocação [PUT] 🔒👷
 
-- Rota: `PUT /api/alocacoes/:id`
+- Rota: `PUT /alocacoes/:id`
 - Body:
   ```json
   {
@@ -495,7 +495,7 @@ Rotas marcadas com 🔒 exigem autenticação. Rotas marcadas com 👷 exigem qu
 
 ### Deletar Alocação [DELETE] 🔒👷
 
-- Rota: `DELETE /api/alocacoes/:id`
+- Rota: `DELETE /alocacoes/:id`
 - Resposta:
 - ```json
   {
