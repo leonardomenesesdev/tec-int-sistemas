@@ -394,24 +394,180 @@ Rotas marcadas com 🔒 exigem autenticação. Rotas marcadas com 👷 exigem qu
 ### Listar Todas as Alocações [GET] 🔒👷
 
 - Rota: `GET /alocacoes`
+- Resposta:
+  ```json
+  [
+    {
+      "id": 6,
+      "clienteId": 2,
+      "veiculoId": 1,
+      "dataAlocacao": "2026-04-08T13:00:00.000Z",
+      "dataDevolucao": null,
+      "valorTotal": 500,
+      "isAtiva": true,
+      "createdAt": "2026-04-08T10:54:44.427Z",
+      "updatedAt": "2026-04-08T10:55:47.564Z",
+      "cliente": {
+        "id": 2,
+        "name": "levi ruivo",
+        "email": "levi@example.com"
+      },
+      "veiculo": {
+        "id": 1,
+        "placa": "ABC-1234",
+        "modelo": "Corolla",
+        "marca": "Toyota",
+        "isDisponivel": false
+      }
+    },
+    {
+      "id": 7,
+      "clienteId": 7,
+      "veiculoId": 11,
+      "dataAlocacao": "2026-04-08T13:00:00.000Z",
+      "dataDevolucao": null,
+      "valorTotal": 350,
+      "isAtiva": true,
+      "createdAt": "2026-04-09T10:20:40.320Z",
+      "updatedAt": "2026-04-09T10:20:40.320Z",
+      "cliente": {
+        "id": 7,
+        "name": "Fulano Atualizado",
+        "email": "novo@example.com"
+      },
+      "veiculo": {
+        "id": 11,
+        "placa": "ABC-1265",
+        "modelo": "City",
+        "marca": "Honda",
+        "isDisponivel": false
+      }
+    }
+  ]
+  ```
 
 ---
 
 ### Listar Alocações Ativas [GET] 🔒👷
 
 - Rota: `GET /alocacoes/ativas`
+- Resposta:
+  ```json
+  [
+    {
+      "id": 6,
+      "clienteId": 2,
+      "veiculoId": 1,
+      "dataAlocacao": "2026-04-08T13:00:00.000Z",
+      "dataDevolucao": null,
+      "valorTotal": 500,
+      "isAtiva": true,
+      "createdAt": "2026-04-08T10:54:44.427Z",
+      "updatedAt": "2026-04-08T10:55:47.564Z",
+      "cliente": {
+        "id": 2,
+        "name": "levi ruivo",
+        "email": "levi@example.com"
+      },
+      "veiculo": {
+        "id": 1,
+        "placa": "ABC-1234",
+        "modelo": "Corolla",
+        "marca": "Toyota",
+        "isDisponivel": false
+      }
+    },
+    {
+      "id": 8,
+      "clienteId": 7,
+      "veiculoId": 11,
+      "dataAlocacao": "2026-04-08T13:00:00.000Z",
+      "dataDevolucao": null,
+      "valorTotal": 350,
+      "isAtiva": true,
+      "createdAt": "2026-04-09T10:39:44.185Z",
+      "updatedAt": "2026-04-09T10:39:44.185Z",
+      "cliente": {
+        "id": 7,
+        "name": "Fulano Atualizado",
+        "email": "novo@example.com"
+      },
+      "veiculo": {
+        "id": 11,
+        "placa": "ABC-1265",
+        "modelo": "City",
+        "marca": "Honda",
+        "isDisponivel": false
+      }
+    }
+  ]
+  ```
 
 ---
 
 ### Listar Alocações por Cliente [GET] 🔒👷
 
 - Rota: `GET /alocacoes/cliente/:clienteId`
+- Resposta:
+  ```json
+  [
+    {
+      "id": 6,
+      "clienteId": 2,
+      "veiculoId": 1,
+      "dataAlocacao": "2026-04-08T13:00:00.000Z",
+      "dataDevolucao": null,
+      "valorTotal": 500,
+      "isAtiva": true,
+      "createdAt": "2026-04-08T10:54:44.427Z",
+      "updatedAt": "2026-04-08T10:55:47.564Z",
+      "cliente": {
+        "id": 2,
+        "name": "levi ruivo",
+        "email": "levi@example.com"
+      },
+      "veiculo": {
+        "id": 1,
+        "placa": "ABC-1234",
+        "modelo": "Corolla",
+        "marca": "Toyota",
+        "isDisponivel": false
+      }
+    }
+  ]
+  ```
 
 ---
 
 ### Buscar Alocação por ID [GET] 🔒👷
 
 - Rota: `GET /alocacoes/:id`
+- Resposta:
+  ```json
+  {
+    "id": 7,
+    "clienteId": 7,
+    "veiculoId": 11,
+    "dataAlocacao": "2026-04-08T13:00:00.000Z",
+    "dataDevolucao": null,
+    "valorTotal": 350,
+    "isAtiva": true,
+    "createdAt": "2026-04-09T10:20:40.320Z",
+    "updatedAt": "2026-04-09T10:20:40.320Z",
+    "cliente": {
+      "id": 7,
+      "name": "Fulano Atualizado",
+      "email": "novo@example.com"
+    },
+    "veiculo": {
+      "id": 11,
+      "placa": "ABC-1265",
+      "modelo": "City",
+      "marca": "Honda",
+      "isDisponivel": false
+    }
+  }
+  ```
 
 ---
 
